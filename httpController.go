@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net"
 	"net/http"
 	"sync"
 )
@@ -47,6 +48,9 @@ func GetListKeluargaHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while writing response: %v", err.Error()), 400)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
+
 	return
 
 }
@@ -63,6 +67,8 @@ func AddKeluargaHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func UpdateKeluargaHttp(w http.ResponseWriter, req *http.Request) {
@@ -77,6 +83,8 @@ func UpdateKeluargaHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func DeleteKeluargaHttp(w http.ResponseWriter, req *http.Request) {
@@ -91,6 +99,8 @@ func DeleteKeluargaHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func AddAsetHttp(w http.ResponseWriter, req *http.Request) {
@@ -105,6 +115,8 @@ func AddAsetHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func UpdateAsetHttp(w http.ResponseWriter, req *http.Request) {
@@ -119,6 +131,8 @@ func UpdateAsetHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func DeleteAsetHttp(w http.ResponseWriter, req *http.Request) {
@@ -133,6 +147,8 @@ func DeleteAsetHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func AddAsetKeluargaHttp(w http.ResponseWriter, req *http.Request) {
@@ -147,6 +163,8 @@ func AddAsetKeluargaHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func DeleteAsetKeluargaHttp(w http.ResponseWriter, req *http.Request) {
@@ -161,6 +179,8 @@ func DeleteAsetKeluargaHttp(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, fmt.Sprintf("Error while save the data: %v", err.Error()), 500)
 		return
 	}
+
+	saveIp(req.RemoteAddr)
 }
 
 func decodeKeluargaPayload(req *http.Request) (KeluargaPayload, error) {
@@ -203,4 +223,9 @@ func decodeAsetKeluargaPayload(req *http.Request) (AsetKeluargaPayload, error) {
 	}
 
 	return asetKeluarga, nil
+}
+
+func saveIp(addr string) {
+	ip, port, _ := net.SplitHostPort(addr)
+	addIpAddress(ip, port)
 }

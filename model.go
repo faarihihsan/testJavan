@@ -42,3 +42,8 @@ type Product struct {
 	Title string `json:"title"`
 	Price int    `json:"price"`
 }
+
+type Adress struct {
+	Ip   string `json:"ip"`
+	Port string `json:"port"`
+}

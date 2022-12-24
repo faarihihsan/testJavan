@@ -42,7 +42,7 @@ func main() {
 		}
 
 		// buffer to get data
-		received := make([]byte, 1024)
+		received := make([]byte, 4096)
 		//var received []byte
 		_, err = conn.Read(received)
 		if err != nil {

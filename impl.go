@@ -51,6 +51,8 @@ func AddKeluargaImpl(payload KeluargaPayload) error {
 		return errors.New(fmt.Sprintf("Error while writing to db: %v", err.Error()))
 	}
 
+	sendNotification()
+
 	return nil
 }
 
@@ -61,6 +63,8 @@ func UpdateKeluargaImpl(payload KeluargaPayload) error {
 		return errors.New(fmt.Sprintf("Error while writing to db: %v", err.Error()))
 	}
 
+	sendNotification()
+
 	return nil
 }
 
@@ -69,6 +73,8 @@ func DeleteKeluargaImpl(payload KeluargaPayload) error {
 	if err != nil {
 		return errors.New(fmt.Sprintf("Error while delete row from db: %v", err.Error()))
 	}
+
+	sendNotification()
 
 	return nil
 }
@@ -84,6 +90,8 @@ func AddAsetImpl(payload AsetPayload) error {
 		return errors.New(fmt.Sprintf("Error while writing to db: %v", err.Error()))
 	}
 
+	sendNotification()
+
 	return err
 }
 
@@ -97,6 +105,8 @@ func UpdateAsetImpl(payload AsetPayload) error {
 	if err != nil {
 		return errors.New(fmt.Sprintf("Error while writing to db: %v", err.Error()))
 	}
+
+	sendNotification()
 
 	return nil
 }
@@ -127,6 +137,8 @@ func DeleteAsetImpl(payload AsetPayload) error {
 		return errors.New(fmt.Sprintf("Error while delete row from db: %v", err.Error()))
 	}
 
+	sendNotification()
+
 	return nil
 }
 
@@ -137,6 +149,8 @@ func AddAsetKeluargaImpl(payload AsetKeluargaPayload) error {
 		return errors.New(fmt.Sprintf("Error while writing to db: %v", err.Error()))
 	}
 
+	sendNotification()
+
 	return nil
 }
 
@@ -145,6 +159,8 @@ func DeleteAsetKeluargaImpl(payload AsetKeluargaPayload) error {
 	if err != nil {
 		return errors.New(fmt.Sprintf("Error while delete row from db: %v", err.Error()))
 	}
+
+	sendNotification()
 
 	return nil
 }

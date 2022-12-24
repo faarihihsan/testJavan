@@ -29,6 +29,15 @@ CREATE TABLE keluarga_aset
     FOREIGN KEY (id_aset) REFERENCES aset (id) ON DELETE CASCADE
 );
 
+-- for question 3
+CREATE TABLE ip_address
+(
+    ip VARCHAR(255),
+    port VARCHAR(255),
+
+    UNIQUE (ip, port)
+);
+
 INSERT INTO keluarga(id, nama, parent)
 VALUES (1, 'Bani', null),
        (2, 'Budi', 1),
