@@ -1,3 +1,4 @@
 go_build_github_com_faarihihsan_testJavan.exe
 go_build_github_com_faarihihsan_testJavan_linux
 testJavan
+.idea
