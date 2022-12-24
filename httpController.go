@@ -5,10 +5,11 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"sync"
 )
 
-func controller() {
-	http.HandleFunc("/get-list-keluarga", GetListKeluarga)
+func httpController(wg *sync.WaitGroup) {
+	http.HandleFunc("/get-list-keluarga", GetListKeluargaHttp)
 	http.HandleFunc("/add-keluarga", AddKeluargaHttp)
 	http.HandleFunc("/update-keluarga", UpdateKeluargaHttp)
 	http.HandleFunc("/delete-keluarga", DeleteKeluargaHttp)
@@ -18,15 +19,16 @@ func controller() {
 	http.HandleFunc("/add-aset-keluarga", AddAsetKeluargaHttp)
 	http.HandleFunc("/delete-aset-keluarga", DeleteAsetKeluargaHttp)
 
-	fmt.Println(fmt.Sprintf("Listening on port %v", http_port))
+	fmt.Println(fmt.Sprintf("Listening HTTP protocol on port %v", http_port))
 	err := http.ListenAndServe(fmt.Sprintf(":%v", http_port), nil)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
+	wg.Done()
 }
 
-func GetListKeluarga(w http.ResponseWriter, req *http.Request) {
+func GetListKeluargaHttp(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	res, err := GetListKeluargaImpl()
 	if err != nil {

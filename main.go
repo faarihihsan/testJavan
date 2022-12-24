@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/lib/pq"
+	"sync"
 )
 
 var dbClient *sql.DB
@@ -41,7 +42,11 @@ func main() {
 
 	dbClient = db
 
-	go controller()
-	go tcpListener()
+	wg := new(sync.WaitGroup)
+	wg.Add(2)
 
+	go httpController(wg)
+	go tcpController(wg)
+
+	wg.Wait()
 }

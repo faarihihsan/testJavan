@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+  keluargadb:
+    container_name: keluargadb
+    image: postgres:12
+    hostname: keluargadb
+    networks:
+      - keluargadb
+    environment:
+      POSTGRES_USER: keluargadb
+      POSTGRES_PASSWORD: keluargadb
+      POSTGRES_DB: keluargadb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/keluargadb:/var/lib/
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    networks:
+      - keluargadb
+    ports:
+      - "8081:8080"
+    environment:
+      ADMINER_DESIGN: dracula
+      ADMINER_PLUGINS: tables-filter tinymce
+      ADMINER_DEFAULT_SERVER: keluargadb
+      ADMINER_DEFAULT_PORT: 5432
+      ADMINER_DEFAULT_DB: keluargadb
+
+networks:
+  keluargadb:
