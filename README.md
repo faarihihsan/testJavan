@@ -1,3 +1,7 @@
+## What's inside
+- assessment for number 1 is in file ```keluarga.sql```
+- assessment for number 2 & 3 can be tested by running the app
+
 ## How to Run
 1. initiate database by running ```docker compose up```
 2. create table using file ```keluarga.sql```
